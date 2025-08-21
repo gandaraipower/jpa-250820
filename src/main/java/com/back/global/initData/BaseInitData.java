@@ -16,14 +16,25 @@ public class BaseInitData {
     @Bean
     ApplicationRunner initDataRunner(){
         return args -> {
-
-            Post post1=new Post("제목1","내용1");
-            postRepository.save(post1);
-             postRepository.count();
-
-             postRepository.findById(4);
-
+            work1();
+            work2();
 
         };
+    }
+
+    private void work1() {
+
+        if(postRepository.count() >0){
+            return;
+        }
+        Post post1=new Post("제목1","내용1");
+        postRepository.save(post1);
+
+        Post post2=new Post("제목2","내용2");
+        postRepository.save(post2);
+    }
+
+    private void work2() {
+        postRepository.findById(1);
     }
 }
