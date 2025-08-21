@@ -22,6 +22,7 @@ public class BaseInitData {
         };
     }
 
+    //baseinitData(repository) -> view -> service
     private void work1() {
 
         if(postRepository.count() >0){
