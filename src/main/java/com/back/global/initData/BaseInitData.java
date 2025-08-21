@@ -18,7 +18,7 @@ public class BaseInitData {
 
              postRepository.count();
 
-             postRepository.findById(1);
+             postRepository.findById(4);
 /*
             Post post1=new Post();
             post1.setTitle("첫 번째 게시글");
