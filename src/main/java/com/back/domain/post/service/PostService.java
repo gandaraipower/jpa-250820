@@ -7,17 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service //PostService를 bean으로 만듬, 가독성을 위해 Service, Component, Repository 사용
+@Service
 @RequiredArgsConstructor
 public class PostService {
-
 
     private final PostRepository postRepository;
 
     public void write(String title, String content) {
-
-        Post post = new Post(title,content);
-
+        Post post = new Post(title, content);
         postRepository.save(post);
     }
 
@@ -27,5 +24,9 @@ public class PostService {
 
     public long getTotalCount() {
         return postRepository.count();
+    }
+
+    public void delete(Post post) {
+        postRepository.delete(post);
     }
 }

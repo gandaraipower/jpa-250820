@@ -22,12 +22,15 @@ public class BaseInitData {
     private final PostService postService;
 
     @Bean
-    @Transactional
     ApplicationRunner initDataRunner() {
         return args -> {
 
             self.work1();
             self.work2();
+
+            new Thread(() -> {
+                self.work3();
+            }).start();
 
         };
     }
@@ -51,6 +54,18 @@ public class BaseInitData {
 
         Optional<Post> opPost = postService.getPost(1);
         // select * from post where id = 1;
+    }
+
+    @Transactional
+    void work3() {
+        Post post1 = postService.getPost(1).get();
+        Post post2 = postService.getPost(2).get();
+
+        postService.delete(post1);
+
+        if(true) throw new RuntimeException("테스트용 예외 발생");
+
+        postService.delete(post2);
     }
 
 }
