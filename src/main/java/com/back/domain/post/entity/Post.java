@@ -5,20 +5,20 @@ import lombok.*;
 
     @Setter
     @Getter
-    @RequiredArgsConstructor
+    @NoArgsConstructor
     @Entity
     public class Post {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
         private int id;
-        private final String title;
+        private String title;
         @Column(columnDefinition = "TEXT")
-        private final String content;
+        private String content;
 
-        public Post(){
-            this.title="";
-            this.content="";
+        public Post(String title, String content) {
+            this.title=title;
+            this.content=content;
         }
     }
 
