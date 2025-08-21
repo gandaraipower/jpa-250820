@@ -2,6 +2,8 @@ package com.back.global.initData;
 
 import com.back.domain.post.entity.Post;
 import com.back.domain.post.service.PostService;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,16 +11,15 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Optional;
 
 @Configuration //spring이 bean으로 등록해 줌
+@RequiredArgsConstructor
 public class BaseInitData {
 
 
-    private PostService postService;
+    private final PostService postService; //한번저장하고 계속 쓸 수있다. 바뀔 일이 없다
 
-    public BaseInitData(PostService postService) {
-        this.postService = postService;
-    }
 
     @Bean
+    @Transactional
     ApplicationRunner initDataRunner(){
         return args -> {
             work1();
@@ -27,6 +28,8 @@ public class BaseInitData {
     }
 
     //baseinitData(repository) -> view -> service
+    //생성
+    @Transactional
     private void work1() {
 
         if(postService.getTotalCount() >0){
@@ -38,7 +41,9 @@ public class BaseInitData {
         postService.write("제목2","내용2");
 
     }
-
+    
+    //조회
+    @Transactional
     private void work2() {
         Optional<Post> onPost = postService.getPost(1);
     }
