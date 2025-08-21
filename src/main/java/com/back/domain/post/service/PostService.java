@@ -3,11 +3,11 @@ package com.back.domain.post.service;
 import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Component //PostService를 bean으로 만듬
+@Service //PostService를 bean으로 만듬, 가독성을 위해 Service, Component, Repository 사용
 public class PostService {
 
     @Autowired

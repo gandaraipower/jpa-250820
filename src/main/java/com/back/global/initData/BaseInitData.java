@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Optional;
 
-@Configuration
+@Configuration //spring이 bean으로 등록해 줌
 public class BaseInitData {
 
     @Autowired    //new를 할려면
@@ -30,7 +30,7 @@ public class BaseInitData {
             return;
         }
         
-        //서비스를 ㄷ입해서 비즈니스 로직을 재사용
+        //서비스를 도입해서 비즈니스 로직을 재사용
         postService.write("제목1","내용1");
         postService.write("제목2","내용2");
 
