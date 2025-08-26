@@ -39,4 +39,11 @@ public class PostRepositoryTest {
         assertThat(savedPost.getContent()).isEqualTo("new 내용");
 
     }
+
+    @Test
+    @DisplayName("귤 개수 조회")
+    void t3(){
+        long cnt=postRepository.count();
+        assertThat(cnt).isEqualTo(2L);
+    }
 }
