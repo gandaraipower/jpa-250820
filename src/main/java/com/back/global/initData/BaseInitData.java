@@ -1,7 +1,8 @@
 package com.back.global.initData;
 
-import com.back.domain.post.entity.Post;
-import com.back.domain.post.service.PostService;
+import com.back.domain.member.service.MemberService;
+import com.back.domain.post.post.entity.Post;
+import com.back.domain.post.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -20,19 +21,13 @@ public class BaseInitData {
     @Lazy
     private BaseInitData self;
     private final PostService postService;
+    private final MemberService memberService;
 
     @Bean
     ApplicationRunner initDataRunner() {
         return args -> {
-
             self.work1();
-            self.work2();
 
-//            new Thread(() -> {
-//                self.work3();
-//            }).start();
-
-            self.work4();
         };
     }
 
@@ -44,9 +39,16 @@ public class BaseInitData {
             return;
         }
 
+        memberService.join("systemUser", "시스템");
+        memberService.join("adminUser", "관리자");
+        memberService.join("user1", "유저1");
+        memberService.join("user2", "유저2");
+        memberService.join("user3", "유저3");
+
+
         // 서비스를 도입해서 비즈니스 로직을 재사용
-        postService.write("제목1", "내용1");
-        postService.write("제목2", "내용2");
+        postService.write(3, "제목1", "내용1");
+        postService.write(4, "제목2", "내용2");
     }
 
     // 조회
@@ -72,7 +74,7 @@ public class BaseInitData {
     @Transactional
     void work4() {
         Post post1 = postService.getPost(1).get();
-        postService.modify(post1, "제목2-수정", "내용2-수정");
+        postService.modify(post1, "제목1-수정2", "내용1-수정2");
     }
 
 }
