@@ -1,5 +1,6 @@
 package com.back.global.initData;
 
+import com.back.domain.member.entity.Member;
 import com.back.domain.member.service.MemberService;
 import com.back.domain.post.post.entity.Post;
 import com.back.domain.post.post.service.PostService;
@@ -39,16 +40,16 @@ public class BaseInitData {
             return;
         }
 
-        memberService.join("systemUser", "시스템");
-        memberService.join("adminUser", "관리자");
-        memberService.join("user1", "유저1");
-        memberService.join("user2", "유저2");
-        memberService.join("user3", "유저3");
+        Member member1=memberService.join("systemUser", "시스템");
+        Member member2=memberService.join("adminUser", "관리자");
+        Member member3=memberService.join("user1", "유저1");
+        Member member4=memberService.join("user2", "유저2");
+        Member member5=memberService.join("user3", "유저3");
 
 
         // 서비스를 도입해서 비즈니스 로직을 재사용
-        postService.write(3, "제목1", "내용1");
-        postService.write(4, "제목2", "내용2");
+        postService.write(member3, "제목1", "내용1");
+        postService.write(member4, "제목2", "내용2");
     }
 
     // 조회

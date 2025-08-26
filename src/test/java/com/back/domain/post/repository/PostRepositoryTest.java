@@ -34,7 +34,7 @@ public class PostRepositoryTest {
     @DisplayName("글 생성")
     void t2() {
 
-        Post newPost = new Post("new 제목", "new 내용");
+        Post newPost = new Post("new 제목", "new 내용",null);
 
         assertThat(newPost.getId()).isNull();
 
