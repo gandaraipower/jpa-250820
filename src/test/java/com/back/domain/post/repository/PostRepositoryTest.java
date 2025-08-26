@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional
+@Rollback
 public class PostRepositoryTest {
 
     @Autowired
@@ -27,8 +29,6 @@ public class PostRepositoryTest {
 
     @Test
     @DisplayName("귤 생성")
-    @Transactional
-    @Rollback
     void t2(){
 
         Post newPost=new Post("new 제목","new 내용");
