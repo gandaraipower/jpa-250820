@@ -28,10 +28,11 @@ public class BaseInitData {
             self.work1();
             self.work2();
 
-            new Thread(() -> {
-                self.work3();
-            }).start();
+//            new Thread(() -> {
+//                self.work3();
+//            }).start();
 
+            self.work4();
         };
     }
 
@@ -49,7 +50,7 @@ public class BaseInitData {
     }
 
     // 조회
-    @Transactional
+    @Transactional(readOnly = true)
     void work2() {
 
         Optional<Post> opPost = postService.getPost(1);
@@ -61,11 +62,17 @@ public class BaseInitData {
         Post post1 = postService.getPost(1).get();
         Post post2 = postService.getPost(2).get();
 
-        postService.delete(post1);
+        postService.delete(post1); // 트랜잭션
 
         if(true) throw new RuntimeException("테스트용 예외 발생");
 
-        postService.delete(post2);
+        postService.delete(post2); // 트랜잭션
+    }
+
+    @Transactional
+    void work4() {
+        Post post1 = postService.getPost(1).get();
+        postService.modify(post1, "제목2-수정", "내용2-수정");
     }
 
 }
